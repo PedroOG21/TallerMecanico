@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.util.Objects;
 
@@ -16,15 +16,15 @@ public class Cliente {
         setTelefono(telefono);
     }
 
-    public Cliente (Cliente cliente){
-        Objects.requireNonNull(cliente,"No es posible copiar un cliente nulo.");
-        setDni(cliente.dni);
-        setTelefono(cliente.telefono);
-        setNombre(cliente.nombre);
+    public Cliente(Cliente cliente) {
+        Objects.requireNonNull(cliente, "No es posible copiar un cliente nulo.");
+        dni = cliente.dni;
+        telefono = cliente.telefono;
+        nombre = cliente.nombre;
     }
 
     public void setTelefono(String telefono) {
-        Objects.requireNonNull(telefono,"El teléfono no puede ser nulo.");
+        Objects.requireNonNull(telefono, "El teléfono no puede ser nulo.");
         if (!telefono.matches(ER_TELEFONO)) {
             throw new IllegalArgumentException("El teléfono no tiene un formato válido.");
         }
@@ -39,19 +39,18 @@ public class Cliente {
     }
 
     private void setDni(String dni) {
-        Objects.requireNonNull(dni,"El DNI no puede ser nulo.");
+        Objects.requireNonNull(dni, "El DNI no puede ser nulo.");
         if (!dni.matches(ER_DNI)) {
             throw new IllegalArgumentException("El DNI no tiene un formato válido.");
         }
-        if (!comprobarLetraDni(dni)){
+        if (!comprobarLetraDni(dni)) {
             throw new IllegalArgumentException("La letra del DNI no es correcta.");
         }
         this.dni = dni;
     }
 
     public void setNombre(String nombre) {
-        Objects.requireNonNull(nombre,"El nombre no puede ser nulo.");
-
+        Objects.requireNonNull(nombre, "El nombre no puede ser nulo.");
         if (!nombre.matches(ER_NOMBRE)) {
             throw new IllegalArgumentException("El nombre no tiene un formato válido.");
         }
@@ -70,15 +69,15 @@ public class Cliente {
         return telefono;
     }
 
-    public static Cliente get (String dni){
-       return new Cliente("Juan Pérez",dni,"638290372");
+    public static Cliente get(String dni) {
+        return new Cliente("Juan Pérez", dni, "638290372");
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cliente cliente)) return false;
-        return Objects.equals(dni,cliente.dni);
+        return Objects.equals(dni, cliente.dni);
     }
 
     @Override

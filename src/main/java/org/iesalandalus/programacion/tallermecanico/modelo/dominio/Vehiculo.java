@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.util.Objects;
 
@@ -14,7 +14,6 @@ public record Vehiculo(String marca, String modelo, String matricula) {
         this.modelo = modelo;
         this.matricula = matricula;
     }
-
     private void validarMatricula(String matricula) {
         Objects.requireNonNull(matricula,"La matrícula no puede ser nula.");
         if (!matricula.matches(ER_MATRICULA)){
@@ -28,7 +27,6 @@ public record Vehiculo(String marca, String modelo, String matricula) {
             throw new IllegalArgumentException("El modelo no puede estar en blanco.");
         }
     }
-
 
     private void validarMarca(String marca) {
         Objects.requireNonNull(marca,"La marca no puede ser nula.");
