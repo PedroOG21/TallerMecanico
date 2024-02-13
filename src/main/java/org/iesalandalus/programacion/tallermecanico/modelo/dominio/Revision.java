@@ -63,7 +63,7 @@ public class Revision {
         return fechaInicio;
     }
 
-    public void setFechaFin(LocalDate fechaFin){
+    public void setFechaFin(LocalDate fechaFin) {
         Objects.requireNonNull(fechaInicio, "La fecha fin no puede ser nula.");
         if (fechaFin.equals(fechaInicio) || fechaFin.isBefore(fechaInicio)) {
             throw new IllegalArgumentException("ERROR:");
@@ -102,7 +102,7 @@ public class Revision {
         if (precioMaterial <= 0) {
             throw new IllegalArgumentException("El precio del material a añadir debe ser mayor que cero.");
         }
-        if (estaCerrada()){
+        if (estaCerrada()) {
             throw new OperationNotSupportedException("No se puede añadir precio del material, ya que la revisión está cerrada.");
         }
         this.precioMaterial += precioMaterial;
@@ -120,7 +120,7 @@ public class Revision {
         if (fechaFin.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
         }
-        if (estaCerrada()){
+        if (estaCerrada()) {
             throw new OperationNotSupportedException("La revisión ya está cerrada.");
         }
         this.fechaFin = fechaFin;
@@ -129,14 +129,14 @@ public class Revision {
     public float getPrecio() {
         float precioHoras = horas * PRECIO_HORA;
         float precioDias = getDias() * PRECIO_DIA;
-        return precioHoras + precioDias + precioMaterial*PRECIO_MATERIAL;
+        return precioHoras + precioDias + precioMaterial * PRECIO_MATERIAL;
 
     }
 
     private float getDias() {
         float dia = 0;
-        if (fechaFin != null){
-            dia= (float) fechaInicio.until(fechaFin).getDays();
+        if (fechaFin != null) {
+            dia = (float) fechaInicio.until(fechaFin).getDays();
         }
         return dia;
     }
