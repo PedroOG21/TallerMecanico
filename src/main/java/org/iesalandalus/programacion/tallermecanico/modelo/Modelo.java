@@ -115,7 +115,7 @@ public class Modelo {
 
     public List<Cliente> getClientes() {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
-        for (Cliente cliente : clientes.get()){
+        for (Cliente cliente : clientes.get()) {
             listaClientes.add(new Cliente(cliente));
         }
         return listaClientes;
