@@ -1,9 +1,12 @@
 package org.iesalandalus.programacion.tallermecanico.modelo;
 
+
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Clientes;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Revisiones;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Vehiculos;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +29,7 @@ class ModeloTest {
     @Mock
     private static Revisiones revisiones;
     @InjectMocks
-    private Modelo modelo ;
+    private Modelo modelo;
 
     private static Cliente cliente;
     private static Vehiculo vehiculo;
@@ -220,7 +223,7 @@ class ModeloTest {
         when(revisiones.get(cliente)).thenReturn(new ArrayList<>(List.of(revision)));
         List<Revision> revisionesCliente = modelo.getRevisiones(cliente);
         verify(revisiones).get(cliente);
-        assertNotSame(revision,revisionesCliente.get(0));
+        assertNotSame(revision, revisionesCliente.get(0));
     }
 
     @Test
@@ -228,7 +231,7 @@ class ModeloTest {
         when(revisiones.get(vehiculo)).thenReturn(new ArrayList<>(List.of(revision)));
         List<Revision> revisionesVehiculo = modelo.getRevisiones(vehiculo);
         verify(revisiones).get(vehiculo);
-        assertNotSame(revision,revisionesVehiculo.get(0));
+        assertNotSame(revision, revisionesVehiculo.get(0));
     }
 
 }
