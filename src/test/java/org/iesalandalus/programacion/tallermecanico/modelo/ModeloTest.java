@@ -112,6 +112,7 @@ class ModeloTest {
     @Test
     void buscarClienteLlamaClientesBuscar() {
         assertDoesNotThrow(() -> modelo.insertar(cliente));
+        //when(clientes.buscar(cliente)).thenReturn(cliente);
         Cliente clienteEncontrado = modelo.buscar(cliente);
         verify(clientes).buscar(cliente);
         assertNotSame(cliente, clienteEncontrado);
@@ -127,6 +128,7 @@ class ModeloTest {
     @Test
     void buscarRevisionLlamaRevisionesBuscar() {
         assertDoesNotThrow(() -> modelo.insertar(revision));
+        //when(revisiones.buscar(revision)).thenReturn(revision);
         Revision revisionEncontrada = modelo.buscar(revision);
         verify(revisiones).buscar(revision);
         assertNotSame(revision, revisionEncontrada);

@@ -22,37 +22,37 @@ public enum Opcion {
     ANADIR_HORAS_REVISION("Añadir horas", 15),
     ANADIR_PRECIO_MATERIAL_REVISION("Añadir precio material", 16),
     CERRAR_REVISION("Cerrar revision", 17),
-    SALIR("Salir", 18);
-    private int numeroOpcion;
-    private String mensaje;
+    LISTAR_REVISIONES("Listar revisiones", 18),
+    SALIR("Salir", 19);
+    private final int numeroOpcion;
+    private final String mensaje;
 
-    public static final Map<Integer, Opcion> opciones;
+    public static final Map<Integer, Opcion> opciones = new HashMap<>();
 
     static {
-        opciones = new HashMap<>();
         for (Opcion opcion : Opcion.values()) {
             opciones.put(opcion.numeroOpcion, opcion);
         }
     }
 
-    Opcion(String mensaje, int opcion) {
-        this.numeroOpcion = opcion;
+    private Opcion(String mensaje, int numeroOpcion) {
+        this.numeroOpcion = numeroOpcion;
         this.mensaje = mensaje;
     }
 
     public static boolean esValida(int numeroOpcion) {
-        Objects.requireNonNull(numeroOpcion,"No puede ser nula la opción.");
         return opciones.containsKey(numeroOpcion);
     }
 
     public static Opcion get(int numeroOpcion) {
-        Opcion.esValida(numeroOpcion);
-        Opcion opcion = opciones.get(numeroOpcion);
-        return opcion;
+        if (!esValida(numeroOpcion)) {
+            throw new IllegalArgumentException("El número de la opción no es correcto.");
+        }
+        return opciones.get(numeroOpcion);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] --> %s", this.numeroOpcion, this.mensaje);
+        return String.format("%d.- %s%n", this.numeroOpcion, this.mensaje);
     }
 }
