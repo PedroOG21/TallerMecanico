@@ -3,9 +3,11 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public class Cliente {
-    private static final String ER_NOMBRE = "(([A-Z][a-záéíóú]+)( [A-Z][a-záéíóú]+)*)";
+
+    private static final String ER_NOMBRE = "[A-ZÁÉÍÓÚÑ][a-záéíóúüñ]+(?: [A-ZÁÉÍÓÚ][a-záéíóúüñ]+)*+";
     private static final String ER_DNI = "\\d{8}[A-Z]";
     private static final String ER_TELEFONO = "\\d{9}";
+
     private String nombre;
     private String dni;
     private String telefono;
@@ -18,24 +20,25 @@ public class Cliente {
 
     public Cliente(Cliente cliente) {
         Objects.requireNonNull(cliente, "No es posible copiar un cliente nulo.");
+        nombre = cliente.nombre;
         dni = cliente.dni;
         telefono = cliente.telefono;
-        nombre = cliente.nombre;
     }
 
-    public void setTelefono(String telefono) {
-        Objects.requireNonNull(telefono, "El teléfono no puede ser nulo.");
-        if (!telefono.matches(ER_TELEFONO)) {
-            throw new IllegalArgumentException("El teléfono no tiene un formato válido.");
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Objects.requireNonNull(nombre, "El nombre no puede ser nulo.");
+        if (!nombre.matches(ER_NOMBRE)) {
+            throw new IllegalArgumentException("El nombre no tiene un formato válido.");
         }
-        this.telefono = telefono;
+        this.nombre = nombre;
     }
 
-    private boolean comprobarLetraDni(String dni) {
-        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-        int numDni = Integer.parseInt(dni.substring(0, 8));
-        int resto = numDni % 23;
-        return letras.charAt(resto) == dni.charAt(8);
+    public String getDni() {
+        return dni;
     }
 
     private void setDni(String dni) {
@@ -49,28 +52,27 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public void setNombre(String nombre) {
-        Objects.requireNonNull(nombre, "El nombre no puede ser nulo.");
-        if (!nombre.matches(ER_NOMBRE)) {
-            throw new IllegalArgumentException("El nombre no tiene un formato válido.");
-        }
-        this.nombre = nombre;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDni() {
-        return dni;
+    private boolean comprobarLetraDni(String dni) {
+        String letrasDni = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int numero = Integer.parseInt(dni.substring(0, 8));
+        char letra = dni.charAt(8);
+        return letra == letrasDni.charAt(numero % 23);
     }
 
     public String getTelefono() {
         return telefono;
     }
 
+    public void setTelefono(String telefono) {
+        Objects.requireNonNull(telefono, "El teléfono no puede ser nulo.");
+        if (!telefono.matches(ER_TELEFONO)) {
+            throw new IllegalArgumentException("El teléfono no tiene un formato válido.");
+        }
+        this.telefono = telefono;
+    }
+
     public static Cliente get(String dni) {
-        return new Cliente("Juan Pérez", dni, "638290372");
+        return new Cliente("Bob Esponja", dni, "111222333");
     }
 
     @Override
@@ -87,6 +89,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return String.format("%s - %s (%s)", this.nombre, this.dni, this.telefono);
+        return String.format("%s - %s (%s)", nombre, dni, telefono);
     }
+
 }

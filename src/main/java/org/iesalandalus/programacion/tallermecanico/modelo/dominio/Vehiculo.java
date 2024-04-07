@@ -3,22 +3,20 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public record Vehiculo(String marca, String modelo, String matricula) {
-    private static final String ER_MARCA = "[A-Z]+[a-z]*([ -]?[A-Z][a-z]+)*";
-    public static final String ER_MATRICULA = "\\d{4}[QWRTYPSDFGHJKLZXCVBNM]{3}";
 
-    public Vehiculo(String marca, String modelo, String matricula) {
-        validarMarca(marca);
+    private static final String ER_MARCA = "[A-Z][a-z]+(?:[- ]?[A-Z][a-z]+)?|[A-Z]+";
+    private static final String ER_MATRICULA = "\\d{4}[^\\W_AEIOUa-z]{3}";
+
+    public Vehiculo {
+        valoidarMarca(marca);
         validarModelo(modelo);
         validarMatricula(matricula);
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
     }
 
-    private void validarMatricula(String matricula) {
-        Objects.requireNonNull(matricula, "La matrícula no puede ser nula.");
-        if (!matricula.matches(ER_MATRICULA)) {
-            throw new IllegalArgumentException("La matrícula no tiene un formato válido.");
+    private void valoidarMarca(String marca) {
+        Objects.requireNonNull(marca, "La marca no puede ser nula.");
+        if (!marca.matches(ER_MARCA)) {
+            throw new IllegalArgumentException("La marca no tiene un formato válido.");
         }
     }
 
@@ -29,15 +27,15 @@ public record Vehiculo(String marca, String modelo, String matricula) {
         }
     }
 
-    private void validarMarca(String marca) {
-        Objects.requireNonNull(marca, "La marca no puede ser nula.");
-        if (!marca.matches(ER_MARCA)) {
-            throw new IllegalArgumentException("La marca no tiene un formato válido.");
+    private void validarMatricula(String matricula) {
+        Objects.requireNonNull(matricula, "La matrícula no puede ser nula.");
+        if (!matricula.matches(ER_MATRICULA)) {
+            throw new IllegalArgumentException("La matrícula no tiene un formato válido.");
         }
     }
 
     public static Vehiculo get(String matricula) {
-        return new Vehiculo("Seat", "A3", matricula);
+        return new Vehiculo("Seat", "León", matricula);
     }
 
     @Override
@@ -54,6 +52,7 @@ public record Vehiculo(String marca, String modelo, String matricula) {
 
     @Override
     public String toString() {
-        return String.format("%s %s - %s", this.marca, this.modelo, this.matricula);
+        return String.format("%s %s - %s", marca, modelo, matricula);
     }
+
 }
