@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.tallermecanico.vista.eventos;
 import java.util.*;
 
 public class GestorEventos {
+
     Map<Evento, List<ReceptorEventos>> receptores = new EnumMap<>(Evento.class);
 
     public GestorEventos(Evento... eventos) {
@@ -23,7 +24,7 @@ public class GestorEventos {
 
     public void desuscribir(ReceptorEventos receptor, Evento... eventos) {
         Objects.requireNonNull(receptor, "El receptor de eventos no puede ser nulo.");
-        Objects.requireNonNull(eventos, "Te debes dessuscribir de algún evento.");
+        Objects.requireNonNull(eventos, "Te debes desuscribir de algún evento.");
         for (Evento evento : eventos) {
             List<ReceptorEventos> usuarios = receptores.get(evento);
             usuarios.remove(receptor);

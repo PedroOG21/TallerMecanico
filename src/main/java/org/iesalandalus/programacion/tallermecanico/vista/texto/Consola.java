@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Consola {
-    private static final String CADENA_FORMATO_FECHA = "dd/MM/yyyy";
 
-    private Consola() {
-    }
+    private static final String CADENA_FORMATO_FECHA ="dd/MM/yyyy";
+
+    private Consola() {}
 
     static void mostrarCabecera(String mensaje) {
         System.out.printf("%n%s%n", mensaje);
@@ -64,4 +64,5 @@ public class Consola {
         }
         return fecha;
     }
+
 }

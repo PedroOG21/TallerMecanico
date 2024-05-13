@@ -6,8 +6,6 @@ import org.iesalandalus.programacion.tallermecanico.modelo.FabricaModelo;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.FabricaFuenteDatos;
 import org.iesalandalus.programacion.tallermecanico.vista.FabricaVista;
 
-import javax.naming.OperationNotSupportedException;
-
 public class Main {
     public static void main(String[] args) {
         IControlador controlador = new Controlador(FabricaModelo.CASCADA.crear(FabricaFuenteDatos.MEMORIA), FabricaVista.TEXTO.crear());

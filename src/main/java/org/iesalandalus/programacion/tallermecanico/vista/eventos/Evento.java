@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.vista.eventos;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Evento {
     INSERTAR_CLIENTE(11, "Insertar cliente."),

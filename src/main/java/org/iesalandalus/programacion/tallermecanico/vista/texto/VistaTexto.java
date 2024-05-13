@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class VistaTexto implements Vista {
+
     private final GestorEventos gestorEventos = new GestorEventos(Evento.values());
 
     @Override
@@ -33,7 +34,7 @@ public class VistaTexto implements Vista {
 
     @Override
     public void terminar() {
-        System.out.println("Adiosss");
+        System.out.println("¡¡¡Hasta luego Lucasss!!!");
     }
 
     @Override
